@@ -29,6 +29,7 @@ def calculate_CRC32(filename):
     buf = (binascii.crc32(buf) & 0xFFFFFFFF)
     return "%08X" % buf
 
+#Passed a filename, searches the .sfv file for a line containing the filename and returns the CRC32 checksum at the end of the line.
 def read_correct_CRC32(filename):
     beginIndex = checksumFileContents.find(filename)
     line = checksumFileContents[beginIndex : beginIndex+len(filename)]
@@ -49,6 +50,7 @@ def read_correct_CRC32(filename):
     line = line[1]
     return line
 
+#Passed a current number, completion number, and width. Computes and prints a progress bar for curNum.
 def progress_bar(curNum, completeNum, width): 
     percentComplete = (curNum / completeNum) * width
     numDashes = int(percentComplete)
