@@ -1,12 +1,12 @@
 # TODO:
-#               Add comments.
-#               Add support for <10 and >99 .rXX files.
-#		Multithreading? That'd be cool but also fuck that.
+#       Add comments.
+#       Add support for <10 and >99 .rXX files.
+#       Multithreading? That'd be cool but also fuck that.
 
 # Completed:
-#		Make .sfv formatting less particular:
-#			-read/store whole file at once. Search filenames as substrings to find correctCRC
-#		Automatically scan current directory for files to check.
+#       Make .sfv formatting less particular:
+#           -read/store whole file at once. Search filenames as substrings to find correctCRC
+#       Automatically scan current directory for files to check.
 
 import binascii
 import os
