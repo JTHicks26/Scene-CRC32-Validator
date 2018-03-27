@@ -11,7 +11,7 @@ import binascii
 import os
 
 def get_last_file():
-    files = [f for f in os.listdir('.') if os.path.isfile(f)]
+    files = [f for f in os.listdir('.') if os.path.isfile(f)]   #Create list of files in the current directory.
     maxNum = 0
     for f in files:
         try:
@@ -19,7 +19,7 @@ def get_last_file():
                 maxNum = int(f[-2:])
                 filename = f
         except:
-            maxNum = maxNum
+            maxNum=maxNum
     return filename
 
 def calculate_CRC32(filename):
