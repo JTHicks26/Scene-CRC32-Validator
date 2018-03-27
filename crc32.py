@@ -11,6 +11,7 @@
 import binascii
 import os
 
+#Scan current directory and return the full filename of the highest .rXX file.
 def get_last_file():
     files = [f for f in os.listdir('.') if os.path.isfile(f)]   #Create list of files in the current directory.
     maxNum = 0
