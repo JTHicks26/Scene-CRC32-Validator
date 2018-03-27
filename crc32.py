@@ -1,4 +1,5 @@
 # TODO:
+#               Add comments.
 #               Add support for <10 and >99 .rXX files.
 #		Multithreading? That'd be cool but also fuck that.
 
