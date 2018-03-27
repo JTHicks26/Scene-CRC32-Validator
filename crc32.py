@@ -1,12 +1,12 @@
 # TODO:
-#               Add comments.
-#               Add support for <10 and >99 .rXX files.
-#		Multithreading? That'd be cool but also fuck that.
+#       Add comments.
+#       Add support for <10 and >99 .rXX files.
+#       Multithreading? That'd be cool but also fuck that.
 
 # Completed:
-#		Make .sfv formatting less particular:
-#			-read/store whole file at once. Search filenames as substrings to find correctCRC
-#		Automatically scan current directory for files to check.
+#       Make .sfv formatting less particular:
+#           -read/store whole file at once. Search filenames as substrings to find correctCRC
+#       Automatically scan current directory for files to check.
 
 import binascii
 import os
@@ -15,15 +15,16 @@ import os
 def get_last_file():
     files = [f for f in os.listdir('.') if os.path.isfile(f)]   #Create list of files in the current directory.
     maxNum = 0
-    #Search list of files for highest .rXX file
-    for f in files:
+    
+    #Search list of files for highest .rXX file.
+    for f in files:     #For every file in the current directory
         try:
-            if int(f[-2:]) > maxNum:
-                maxNum = int(f[-2:])
-                filename = f
-        except:
-            maxNum=maxNum
-    return filename     #Return full filename of highest .rXX file
+            if int(f[-2:]) > maxNum:    #If the last 2 characters of the file extension are a number greater than maxNum
+                maxNum = int(f[-2:])        #Update maxNum to the new highest number
+                filename = f                #Update filename to the new highest .rXX file
+        except:                         #If the last 2 characters of the file extension are not numbers
+            maxNum=maxNum                   #Do nothing
+    return filename     #Return filename of highest .rXX file
 
 #Calculate CRC32 checksum of a file.
 def calculate_CRC32(filename):
