@@ -80,7 +80,6 @@ def main():
     global checksumFileContents
     checksumFileContents = checksumFile.read()
     
-    
     fileErrors = []
     crcList = []
     correctCRCList = []
@@ -119,6 +118,5 @@ def main():
             print('Received value: \t' + crc + '\n')
     
     
-
 main()
 input("Press Enter to continue...")
