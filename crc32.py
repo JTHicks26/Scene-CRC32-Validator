@@ -13,6 +13,7 @@ import os
 def get_last_file():
     files = [f for f in os.listdir('.') if os.path.isfile(f)]   #Create list of files in the current directory.
     maxNum = 0
+    #Search list of files for highest .rXX file
     for f in files:
         try:
             if int(f[-2:]) > maxNum:
@@ -20,8 +21,9 @@ def get_last_file():
                 filename = f
         except:
             maxNum=maxNum
-    return filename
+    return filename     #Return full filename of highest .rXX file
 
+#Calculate CRC32 checksum of a file.
 def calculate_CRC32(filename):
     buf = open(filename,'rb').read()
     buf = (binascii.crc32(buf) & 0xFFFFFFFF)
