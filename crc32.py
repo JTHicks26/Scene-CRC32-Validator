@@ -97,15 +97,15 @@ def main():
 
     crc = calculate_CRC32(unformattedFilename + '.rar').lower()
     correctCRC = read_correct_CRC32(unformattedFilename + '.rar')
-    rarError = 0
+    rarError = False
     if crc != correctCRC:
-        rarError = 1
+        rarError = True
 
-    if len(fileErrors) == 0 and rarError == 0:
+    if len(fileErrors) == 0 and rarError == False:
         print("\nAll files passed.")
     else:
         print()
-        print(str(len(fileErrors) + rarError ) + " file(s) failed.\n")
+        print(str(len(fileErrors) + int(rarError) ) + " file(s) failed.\n")
         i=0
         for num in fileErrors:
             print("ERROR for .r" + "%02d" % num)
