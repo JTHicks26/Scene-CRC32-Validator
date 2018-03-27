@@ -35,19 +35,8 @@ def calculate_CRC32(filename):
 #Passed a filename, searches the .sfv file for a line containing the filename and returns the CRC32 checksum at the end of the line.
 def read_correct_CRC32(filename):
     beginIndex = checksumFileContents.find(filename)
-    endIndex = beginIndex + len(filename) + 1
-    curChar = checksumFileContents[endIndex]
-    endOfFile = False
-    while curChar != '\n':
-        if endIndex == len(checksumFileContents):
-            endOfFile = True
-            break
-        curChar = checksumFileContents[endIndex]
-        endIndex += 1
-    if(endOfFile):
-        line = checksumFileContents[beginIndex : endIndex]
-    else:
-        line = checksumFileContents[beginIndex : endIndex-1]
+    endIndex = beginIndex + len(filename) + 9
+    line = checksumFileContents[beginIndex:endIndex]
     line = line.split(' ')
     line = line[1]
     return line
