@@ -76,7 +76,7 @@ def main():
     while x < numFiles:													#For every .rXX file in the directory
         formattedFilename = unformattedFilename + ".r" + "%02d" % x		#Append the proper extension for the current file to unformattedFilename
         crc = calculate_CRC32(formattedFilename).lower()				#Calculate the CRC32 checksum for the current file, convert to lowercase
-        correctCRC = read_correct_CRC32(formattedFilename)				#Obtain the correct CRC32 checksum for the current file, convert to lowercase
+        correctCRC = read_correct_CRC32(formattedFilename).lower()		#Obtain the correct CRC32 checksum for the current file, convert to lowercase
         if crc != correctCRC:
             fileErrors.append(x)
             crcList.append(crc)
