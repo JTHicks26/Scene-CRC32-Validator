@@ -2,7 +2,7 @@
 This program verifies crc32 checksums of .rXX and .rar files in the current directory.
 
 # Requirements
-Python 3.7
+Python 3
 
 # Usage
 1) Place crc32.py in the directory with the files to be validated
