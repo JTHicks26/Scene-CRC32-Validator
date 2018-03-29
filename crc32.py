@@ -77,7 +77,7 @@ def main():
     while x < numFiles:													#For every .rXX file in the directory
         formattedFilename = unformattedFilename + ".r" + "%02d" % x		#Append the proper extension for the current file to unformattedFilename
         crc = calculate_CRC32(formattedFilename).lower()				#Calculate the CRC32 checksum for the current file, convert to lowercase
-        correctCRC = read_correct_CRC32(formattedFilename)				#Obtain the correct CRC32 checksum for the current file, convert to lowercase
+        correctCRC = read_correct_CRC32(formattedFilename).lower()		#Obtain the correct CRC32 checksum for the current file, convert to lowercase
         if crc != correctCRC:											#If the calculated and correct checksums don't match
             fileErrors.append(x)											#Append current num to fileErrors[]
             crcList.append(crc)												#Append calculated checksum to crcList[]
@@ -86,7 +86,7 @@ def main():
         x+=1
 
     crc = calculate_CRC32(unformattedFilename + '.rar').lower()			#Calculate checksum for the .rar file
-    correctCRC = read_correct_CRC32(unformattedFilename + '.rar')		#Obtain correct checksum for the .rar file
+    correctCRC = read_correct_CRC32(unformattedFilename + '.rar').lower()		#Obtain correct checksum for the .rar file
     rarError = False
     if crc != correctCRC:												#If the .rar file calculated and correct checksums don't match
         rarError = True													#Set rarError flag to true
