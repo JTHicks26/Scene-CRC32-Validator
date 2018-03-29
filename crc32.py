@@ -85,7 +85,7 @@ def main():
         x+=1
 
     crc = calculate_CRC32(unformattedFilename + '.rar').lower()
-    correctCRC = read_correct_CRC32(unformattedFilename + '.rar')
+    correctCRC = read_correct_CRC32(unformattedFilename + '.rar').lower()
     rarError = False
     if crc != correctCRC:
         rarError = True
