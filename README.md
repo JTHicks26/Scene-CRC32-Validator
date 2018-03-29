@@ -1,5 +1,5 @@
 # crc32
-Python program to verify crc32 checksums of .rXX files in the current directory.
+This program verifies crc32 checksums of .rXX and .rar files in the current directory.
 
 # Requirements
 Python 3.7
