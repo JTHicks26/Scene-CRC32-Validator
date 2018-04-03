@@ -73,7 +73,7 @@ def main():
     crcList = []
     correctCRCList = []
     x=0
-    while x < numFiles:                                         #For every .rXX file in the directory
+    while x < numFiles:                                             #For every .rXX file in the directory
         formattedFilename = unformattedFilename + ".r" + "%02d" % x     #Append the proper extension for the current file to unformattedFilename
         crc = calculate_CRC32(formattedFilename).lower()                #Calculate the CRC32 checksum for the current file, convert to lowercase
         correctCRC = read_correct_CRC32(formattedFilename).lower()      #Read the correct CRC32 checksum for the current file, convert to lowercase
@@ -93,17 +93,17 @@ def main():
     if len(fileErrors) == 0 and rarError == False:                          #If all files checksums are correct
         print("\nAll files passed.")                                            #Print pass message
     else:                                                                   #If any file's checksums didn't match
-        print("\n" + str(len(fileErrors) + int(rarError) ) + " file(s) failed.\n") #Print the number of file failures
+        print("\n"+str(len(fileErrors) + int(rarError))+" file(s) failed.\n")   #Print the number of file failures
         i=0
-        for num in fileErrors:                                                      #For every file that failed
-            print("ERROR for .r" + "%02d" % num)                                        #Print the extension num of the failed file (.rXX)
-            print('Expected value: \t' + correctCRCList[i])                             #Print the value read from the .sfv
-            print('Received value: \t' + crcList[i] + '\n')                             #Print the value calculated by calculate_CRC32()
+        for num in fileErrors:                                                  #For every file that failed
+            print("ERROR for .r" + "%02d" % num)                                    #Print the extension num of the failed file (.rXX)
+            print('Expected value: \t' + correctCRCList[i])                         #Print the value read from the .sfv
+            print('Received value: \t' + crcList[i] + '\n')                         #Print the value calculated by calculate_CRC32()
             i+=1
-        if rarError:                                                                #If .rar file checksum failed
-            print("ERROR for .rar")                                                     #Print error for .rar
-            print('Expected value: \t' + correctCRC)                                    #Print value read from the .sfv
-            print('Received value: \t' + crc + '\n')                                    #Print the value calculated by calculate_CRC32()
+        if rarError:                                                            #If .rar file checksum failed
+            print("ERROR for .rar")                                                 #Print error for .rar
+            print('Expected value: \t' + correctCRC)                                #Print value read from the .sfv
+            print('Received value: \t' + crc + '\n')                                #Print the value calculated by calculate_CRC32()
     
     
 main()
