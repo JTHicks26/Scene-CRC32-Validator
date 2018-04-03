@@ -16,13 +16,17 @@ def get_last_file():
     maxNum = 0
     
     #Search list of files for highest .rXX file.
-    for f in files:             #For every file in the current directory
+    for f in files:                     #For every file in the current directory
         try:
             if int(f[-2:]) > maxNum:        #If the last 2 characters of the file extension are a number greater than maxNum
                 maxNum = int(f[-2:])            #Update maxNum to the new highest number
                 filename = f                    #Update filename to the new highest .rXX file
         except:                             #If the last 2 characters of the file extension are not numbers
             maxNum=maxNum                       #Do nothing
+    if maxNum < 1:                      #If there are no .rXX files found
+        print("No files found.")            #Print error
+        input("Press Enter to continue...") #Pause for input
+        exit()                              #End execution
 
     return filename             #Return filename of highest .rXX file
 
