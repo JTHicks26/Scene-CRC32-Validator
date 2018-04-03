@@ -1,4 +1,4 @@
-# crc32
+# Scene CRC32 Validator
 This program verifies crc32 checksums of .rXX and .rar files in the current directory.
 
 # Requirements
