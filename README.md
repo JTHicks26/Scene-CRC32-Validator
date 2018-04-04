@@ -3,8 +3,8 @@ This program verifies crc32 checksums of .rXX and .rar files in the current dire
 
 # Requirements
 - Python 3
-- Directory with .rXX files.
-- .sfv file with filenames and crc32 checksums seperated by spaces.
+- Directory with .rXX files, .rar file, and .sfv file.
+  - .sfv file must contain filenames and crc32 checksums seperated by a space.
 
 # Usage
 1) Place crc32.py in the directory with the files to be validated
