@@ -1,5 +1,5 @@
 # TODO:
-#       Improve handling of missing files.
+#       Improve handling of missing files and missing entries in .sfv file.
 #       Multithreading? That'd be cool but also fuck that.
 
 # Completed:
@@ -11,13 +11,12 @@
 import binascii
 import os
 
-extLen=0
 
 #Scan current directory and return the full filename of the highest .rXX file.
 def get_last_file():
     global extLen
-    files = [f for f in os.listdir('.') if os.path.isfile(f)]   #Create list of files in the current directory.
     maxNum = 0
+    files = [f for f in os.listdir('.') if os.path.isfile(f)]   #Create list of files in the current directory.
     
     #Determine number of integers in the file extensions.
     for filename in files:
@@ -30,10 +29,10 @@ def get_last_file():
     #Search list of files for highest .rXX file.
     for f in files:                     #For every file in the current directory
         try:
-            if int(f[-extLen:]) > maxNum:        #If the last 2 characters of the file extension are a number greater than maxNum
-                maxNum = int(f[-extLen:])            #Update maxNum to the new highest number
+            if int(f[-extLen:]) > maxNum:   #If the integer at the end of the file extension is a number greater than maxNum
+                maxNum = int(f[-extLen:])       #Update maxNum to the new highest number
                 filename = f                    #Update filename to the new highest .rXX file
-        except:                             #If the last 2 characters of the file extension are not numbers
+        except:                             #If the last characters of the file extension are not numbers
             maxNum=maxNum                       #Do nothing
 
     if maxNum < 1:                      #If there are no .rXX files found
@@ -57,9 +56,8 @@ def calculate_CRC32(filename):
 #Passed a filename, searches the .sfv file for a line containing the filename and returns the CRC32 checksum at the end of the line.
 def read_correct_CRC32(filename):
     beginIndex = checksumFileContents.find(filename)    #Find starting index in the .sfv file of the current .rXX file
-    if beginIndex == -1:
-        #print("ERROR: File " + filename + " not found in .sfv file.")
-        return "Entry not found in .sfv file."
+    if beginIndex == -1:                                #If filename is not found in the .sfv file
+        return "Entry not found in .sfv file."              #Return error message.
     endIndex = beginIndex + len(filename) + 9           #last character of line is 9 characters after the end of the filename
     line = checksumFileContents[beginIndex:endIndex]    #Set variable line to a string of the line beginning with the current filename
     line = line.split(' ')                              #Split line into a list consisting of a filename and the file's checksum
@@ -90,7 +88,7 @@ def main():
     global extLen
     
     lastFilename = get_last_file()
-    numFiles = int(lastFilename[-extLen:]) + 1          #Convert the last 2 characters of the last .rXX file to int and add 1 to determine the number of .rXX files to verify
+    numFiles = int(lastFilename[-extLen:]) + 1          #Convert the ending characters of the last .rXX file to int and add 1 to determine the number of .rXX files to verify
     
     unformattedFilename = lastFilename[:-extLen-2]      #Remove the file extension (.rXX) from the end of the filename
     checksumFile = open(unformattedFilename + '.sfv')   #Open the checksum file for the detected .rXX files
@@ -124,7 +122,7 @@ def main():
         print("\n"+str(len(fileErrors) + int(rarError))+" file(s) failed.\n")   #Print the number of file failures
         i=0
         for num in fileErrors:                                                  #For every file that failed
-            print("ERROR for .r" + ("%0" + str(extLen) + "d") % num)                                    #Print the extension num of the failed file (.rXX)
+            print("ERROR for .r" + ("%0" + str(extLen) + "d") % num)                #Print the extension num of the failed file (.rXX)
             print('Expected value: \t' + correctCRCList[i])                         #Print the value read from the .sfv
             print('Received value: \t' + crcList[i] + '\n')                         #Print the value calculated by calculate_CRC32()
             i+=1
