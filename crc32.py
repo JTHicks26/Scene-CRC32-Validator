@@ -45,10 +45,7 @@ def get_last_file():
     
 #Calculate and return CRC32 checksum of a file.
 def calculate_CRC32(filename):
-    try:
-        buf = open(filename,'rb').read()
-    except:
-        return 1
+    buf = open(filename,'rb').read()
     buf = (binascii.crc32(buf) & 0xFFFFFFFF)
     return "%08X" % buf
 
@@ -57,7 +54,7 @@ def calculate_CRC32(filename):
 def read_correct_CRC32(filename):
     beginIndex = checksumFileContents.find(filename)    #Find starting index in the .sfv file of the current .rXX file
     if beginIndex == -1:                                #If filename is not found in the .sfv file
-        return "Entry not found in .sfv file."              #Return error message.
+        return "Entry not found in .sfv file."              #Return to main() with error message.
     endIndex = beginIndex + len(filename) + 9           #last character of line is 9 characters after the end of the filename
     line = checksumFileContents[beginIndex:endIndex]    #Set variable line to a string of the line beginning with the current filename
     line = line.split(' ')                              #Split line into a list consisting of a filename and the file's checksum
