@@ -120,12 +120,12 @@ def main():
         i=0
         for num in fileErrors:                                                  #For every file that failed
             print("ERROR for .r" + ("%0" + str(extLen) + "d") % num)                #Print the extension num of the failed file (.rXX)
-            print('Correct value: \t' + correctCRCList[i])                          #Print the value read from the .sfv
+            print('Correct value: \t\t' + correctCRCList[i])                          #Print the value read from the .sfv
             print('Calculated value: \t' + crcList[i] + '\n')                       #Print the value calculated by calculate_CRC32()
             i+=1
         if rarError:                                                            #If .rar file checksum failed
             print("ERROR for .rar")                                                 #Print error for .rar
-            print('Correct value: \t' + correctCRC)                                 #Print value read from the .sfv
+            print('Correct value: \t\t' + correctCRC)                                 #Print value read from the .sfv
             print('Calculated value: \t' + crc + '\n')                              #Print the value calculated by calculate_CRC32()
     
     
